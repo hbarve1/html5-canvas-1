@@ -53,7 +53,7 @@ canvas.addEventListener("click", (e) => {
   // drawCircle();
   // console.log(mouse);
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 2; i++) {
     particlesArray.push(new Particle());
   }
 });
@@ -64,7 +64,7 @@ canvas.addEventListener("mousemove", (e) => {
   // console.log(mouse);
   // drawCircle();
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     particlesArray.push(new Particle());
   }
 });
@@ -94,7 +94,7 @@ class Particle {
     this.size = Math.random() * 5 + 1;
     this.speedX = Math.random() * 3 - 1.5;
     this.speedY = Math.random() * 3 - 1.5;
-    this.color = "hsb(" + hue + ", 100%, 50%)";
+    this.color = "hsl(" + hue + ", 100%, 50%)";
   }
 
   update() {
@@ -130,6 +130,21 @@ function handleParticles() {
     particlesArray[i].update();
     particlesArray[i].draw();
 
+    for (let j = i; j < particlesArray.length; j++) {
+      const dx = particlesArray[i].x! - particlesArray[j].x!;
+      const dy = particlesArray[i].y! - particlesArray[j].y!;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < 100) {
+        ctx.beginPath();
+        ctx.strokeStyle = particlesArray[i].color;
+        ctx.lineWidth = 0.2;
+        ctx.moveTo(particlesArray[i].x!, particlesArray[i].y!);
+        ctx.lineTo(particlesArray[j].x!, particlesArray[j].y!);
+        ctx.stroke();
+      }
+    }
+
     if (particlesArray[i].size <= 0.2) {
       particlesArray.splice(i, 1);
       i--;
@@ -139,10 +154,10 @@ function handleParticles() {
 
 // drawCircle();
 function animate() {
-  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   // ctx.fillStyle = "black";
-  ctx.fillStyle = "rgba(0, 0, 0, 0.01)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // ctx.fillStyle = "rgba(0, 0, 0, 0.01)";
+  // ctx.fillRect(0, 0, canvas.width, canvas.height);
   handleParticles();
   // console.log(particlesArray.length);
   hue += 1;
