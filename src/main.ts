@@ -33,9 +33,12 @@ window.addEventListener("resize", () => {
 // ctx.arc(100, 100, 50, 0, Math.PI * 2);
 // ctx.stroke();
 
-const mouse = {
-  x: 0,
-  y: 0,
+const mouse: {
+  x: undefined | number;
+  y: undefined | number;
+} = {
+  x: undefined,
+  y: undefined,
 };
 
 canvas.addEventListener("click", (e) => {
@@ -45,24 +48,30 @@ canvas.addEventListener("click", (e) => {
   // ctx.beginPath();
   // ctx.arc(mouse.x, mouse.y, 50, 0, Math.PI * 2);
   // ctx.stroke();
-  drawCircle();
+  // drawCircle();
   // console.log(mouse);
 });
 
 canvas.addEventListener("mousemove", (e) => {
   mouse.x = e.x;
   mouse.y = e.y;
-  console.log(mouse);
-  drawCircle();
+  // console.log(mouse);
+  // drawCircle();
 });
 
 function drawCircle() {
   ctx.fillStyle = "blue";
   ctx.beginPath();
-  ctx.arc(mouse.x, mouse.y, 50, 0, Math.PI * 2);
+  ctx.arc(mouse.x!, mouse.y!, 50, 0, Math.PI * 2);
   // ctx.arc(130, 100, 50, 0, Math.PI * 2);
   // ctx.stroke();
   ctx.fill();
 }
 
 // drawCircle();
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  requestAnimationFrame(animate);
+  drawCircle();
+}
+animate();
