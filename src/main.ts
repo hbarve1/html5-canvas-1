@@ -107,7 +107,7 @@ class Particle {
   }
 
   draw() {
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "white";
     ctx.beginPath();
     ctx.arc(this.x!, this.y!, this.size, 0, Math.PI * 2);
     ctx.fill();
@@ -135,9 +135,12 @@ function handleParticles() {
 
 // drawCircle();
 function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // ctx.fillStyle = "black";
+  ctx.fillStyle = "rgba(0, 0, 0, 0.01)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   handleParticles();
-  console.log(particlesArray.length);
+  // console.log(particlesArray.length);
   requestAnimationFrame(animate);
   // drawCircle();
 }
