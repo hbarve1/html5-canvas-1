@@ -51,6 +51,10 @@ canvas.addEventListener("click", (e) => {
   // ctx.stroke();
   // drawCircle();
   // console.log(mouse);
+
+  for (let i = 0; i < 10; i++) {
+    particlesArray.push(new Particle());
+  }
 });
 
 canvas.addEventListener("mousemove", (e) => {
@@ -58,6 +62,10 @@ canvas.addEventListener("mousemove", (e) => {
   mouse.y = e.y;
   // console.log(mouse);
   // drawCircle();
+
+  for (let i = 0; i < 10; i++) {
+    particlesArray.push(new Particle());
+  }
 });
 
 function drawCircle() {
@@ -77,10 +85,10 @@ class Particle {
   speedY: number;
 
   constructor() {
-    // this.x = mouse.x;
-    // this.y = mouse.y;
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
+    this.x = mouse.x;
+    this.y = mouse.y;
+    // this.x = Math.random() * canvas.width;
+    // this.y = Math.random() * canvas.height;
     this.size = Math.random() * 5 + 1;
     this.speedX = Math.random() * 3 - 1.5;
     this.speedY = Math.random() * 3 - 1.5;
@@ -89,6 +97,13 @@ class Particle {
   update() {
     this.x = this.x! + this.speedX;
     this.y = this.y! + this.speedY;
+    if (this.x! > canvas.width || this.x! < 0) {
+      this.speedX = -this.speedX;
+    }
+    if (this.y! > canvas.height || this.y! < 0) {
+      this.speedY = -this.speedY;
+    }
+    if (this.size > 0.2) this.size -= 0.05;
   }
 
   draw() {
@@ -104,12 +119,17 @@ function init() {
     particlesArray.push(new Particle());
   }
 }
-init();
+// init();
 
 function handleParticles() {
   for (let i = 0; i < particlesArray.length; i++) {
     particlesArray[i].update();
     particlesArray[i].draw();
+
+    if (particlesArray[i].size <= 0.2) {
+      particlesArray.splice(i, 1);
+      i--;
+    }
   }
 }
 
@@ -117,6 +137,7 @@ function handleParticles() {
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   handleParticles();
+  console.log(particlesArray.length);
   requestAnimationFrame(animate);
   // drawCircle();
 }
