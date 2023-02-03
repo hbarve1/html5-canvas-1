@@ -68,6 +68,16 @@ canvas.addEventListener("mousemove", (e) => {
     particlesArray.push(new Particle());
   }
 });
+canvas.addEventListener("touchmove", (e) => {
+  mouse.x = e.touches[0].clientX;
+  mouse.y = e.touches[0].clientY;
+  // console.log(mouse);
+  // drawCircle();
+
+  for (let i = 0; i < 5; i++) {
+    particlesArray.push(new Particle());
+  }
+});
 
 // function drawCircle() {
 //   ctx.fillStyle = "blue";
