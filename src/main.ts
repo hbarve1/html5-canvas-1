@@ -69,14 +69,14 @@ canvas.addEventListener("mousemove", (e) => {
   }
 });
 
-function drawCircle() {
-  ctx.fillStyle = "blue";
-  ctx.beginPath();
-  ctx.arc(mouse.x!, mouse.y!, 50, 0, Math.PI * 2);
-  // ctx.arc(130, 100, 50, 0, Math.PI * 2);
-  // ctx.stroke();
-  ctx.fill();
-}
+// function drawCircle() {
+//   ctx.fillStyle = "blue";
+//   ctx.beginPath();
+//   ctx.arc(mouse.x!, mouse.y!, 50, 0, Math.PI * 2);
+//   // ctx.arc(130, 100, 50, 0, Math.PI * 2);
+//   // ctx.stroke();
+//   ctx.fill();
+// }
 
 class Particle {
   x: number | undefined;
@@ -118,11 +118,11 @@ class Particle {
   }
 }
 
-function init() {
-  for (let i = 0; i < 100; i++) {
-    particlesArray.push(new Particle());
-  }
-}
+// function init() {
+//   for (let i = 0; i < 100; i++) {
+//     particlesArray.push(new Particle());
+//   }
+// }
 // init();
 
 function handleParticles() {
