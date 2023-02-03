@@ -5,6 +5,7 @@ const canvas = document.createElement("canvas");
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
 const particlesArray: Particle[] = [];
+let hue = 0;
 
 canvas.width = windowWidth;
 canvas.height = windowHeight;
@@ -83,6 +84,7 @@ class Particle {
   size: number;
   speedX: number;
   speedY: number;
+  color: string;
 
   constructor() {
     this.x = mouse.x;
@@ -92,6 +94,7 @@ class Particle {
     this.size = Math.random() * 5 + 1;
     this.speedX = Math.random() * 3 - 1.5;
     this.speedY = Math.random() * 3 - 1.5;
+    this.color = "hsb(" + hue + ", 100%, 50%)";
   }
 
   update() {
@@ -107,7 +110,8 @@ class Particle {
   }
 
   draw() {
-    ctx.fillStyle = "white";
+    // ctx.fillStyle = "white";
+    ctx.fillStyle = "hsl(" + hue + ", 100%, 50%)";
     ctx.beginPath();
     ctx.arc(this.x!, this.y!, this.size, 0, Math.PI * 2);
     ctx.fill();
@@ -141,6 +145,7 @@ function animate() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   handleParticles();
   // console.log(particlesArray.length);
+  hue += 1;
   requestAnimationFrame(animate);
   // drawCircle();
 }
